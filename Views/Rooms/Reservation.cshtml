@@ -1,0 +1,96 @@
+﻿@using MRP.Domain.DomainModels
+@model IEnumerable<Rooms>
+
+@{
+    Layout = null;
+    ViewBag.Title = "Rezerwacja pokoju";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Rezerwacja pokoju</title>
+    <link rel="stylesheet" href="~/Content/jquery-ui.css" />
+    <script src="~/scripts/jquery-1.12.4.js"></script>
+    <script src="~/scripts/jquery-ui-1.12.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {//beginning of jQuery
+            $("#datepicker1").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy/mm/dd",
+                numberOfMonths: 1,
+                maxDate: 365,
+                minDate: -3650
+            });
+
+            $("#datepicker2").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "yy/mm/dd",
+                numberOfMonths: 1,
+                maxDate: 365,
+                minDate: -3650
+            });
+        });
+
+        
+    </script>
+</head>
+<body>
+    <div>
+        <fieldset>
+            <legend>Rezerwacja pokoju</legend>
+            @using (Ajax.BeginForm("CalculatePayment", "Rooms", new AjaxOptions { UpdateTargetId = "price" }))
+            {
+                <ol>
+                    <li>
+                        @Html.Label("Wybierz pokój:") 
+                        @Html.DropDownList("RoomList", ViewBag.roomlist as SelectList, "Wybierz pokój")
+                        
+                    </li>
+                   <li>
+                       @Html.Label("Data przyjazdu:")
+                       @Html.TextBox("arrival")
+                   </li>
+                    <li>
+
+                        @Html.Label("Data odjazdu:")
+                        @Html.TextBox("departure")
+                    </li>
+                                
+                </ol>
+                <button>Sprawdź dostępność i cenę</button>
+                @Html.Label("Cena:")
+                <div id="price"></div>
+
+            }
+            
+        </fieldset>
+       
+        <br>
+        <script>
+            document.getElementById('check').onclick = function (event) {
+                var Arrival = document.getElementsByName("date").item(0).value;
+                var Departure = document.getElementsByName("date2").item(0).value;
+
+                var ArrivalDate = new Date(Arrival);
+                var DepartureDate = new Date(Departure);
+
+                var Duration = (DepartureDate.getTime() - ArrivalDate.getTime()) / (1000 * 24 * 3600);
+               
+                document.writeln("Czas trwania: " + Duration + "</br>");
+
+            }
+        </script>
+        <button id="check">Sprawdź dostepność</button>
+        @{
+            var dur = @Html.Id("duration").ToString();
+        }
+
+
+    </div>
+</body>
+</html>

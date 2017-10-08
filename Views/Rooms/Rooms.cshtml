@@ -1,0 +1,33 @@
+﻿@using MRP.Domain.DomainModels
+@model IEnumerable<Rooms>
+<html>
+@{
+    ViewBag.Title = "Rooms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<body>
+    <h2>Rooms</h2>
+    @foreach (var p in Model)
+    {
+        <div>
+            <h2>Numer pokoju: @p.RoomNum</h2>
+            <h3>Piętro: @p.Floor</h3>
+            <h4>Max ilośc osób: @p.RoomMaxCapacity</h4>
+            <h5>Cena: @p.Price</h5>
+            <h6>Dostepny:</h6>
+            @if (p.IsFree)
+            {
+                <h6>TAK</h6>
+            }
+            else
+            {
+                <h6>NIE</h6>
+            }
+            
+        </div>
+    }
+    
+    
+</body>
+</html>

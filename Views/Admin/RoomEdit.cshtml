@@ -1,0 +1,15 @@
+﻿@model MRP.Domain.DomainModels.Rooms
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Administracja: edycja pokoju";
+}
+
+<h2>Edycja pokoju</h2>
+
+@using (Html.BeginForm("RoomEdit", "Admin"))
+{
+    @Html.EditorForModel()
+    <input type="submit" value="Zapisz" />
+    @Html.ActionLink("Anuluj i powrót do listy", "Index")
+}

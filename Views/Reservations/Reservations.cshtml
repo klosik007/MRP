@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Reservations</title>
+        <link rel="stylesheet" href="~/Content/jquery-ui.min.css">
+        <script src="~/scripts/jquery-1.12.4.js"></script>
+        <script src="~/scripts/jquery-ui-1.12.1.min.js"></script>
+</head>
+<body>
+    <div id="arrival"> 
+        <p>Podaj datę przyjazdu</p>
+        <input type="text" name="date" id="datepick">
+        <script>
+            $( "#datepick" ).datepicker();
+        </script>
+    </div>
+    <div id="departure">
+        <p>Podaj datę wyjazdu</p>
+        <input type="text" name="date" id="datepick">
+        <script>
+            $( "#datepick" ).datepicker();
+        </script>
+    </div>
+    <div id="numofpeople">
+        <p>Podaj ilośc osób</p>
+        <input type="text" name="numofpeople" id="numofpeople">
+    </div>
+</body>
+</html>
