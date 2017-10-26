@@ -13,9 +13,11 @@ namespace MRP.NinjectDI
     public class NinjectDep_cyResolver : IDependencyResolver
     {
         private IKernel kernel;
+       // private IKernel kernel2;
         public NinjectDep_cyResolver(IKernel kernelParam)
         {
             kernel = kernelParam;
+           // kernel2 = kernel2Param;
             AddBindings();
         }
         public object GetService(Type serviceType)
@@ -29,6 +31,8 @@ namespace MRP.NinjectDI
         private void AddBindings()
         {
             kernel.Bind<IRoomsRepo>().To<EFRooms>();
+            kernel.Bind<IReservationsRepo>().To<EFReservations>();
+           
         }
     }
 }

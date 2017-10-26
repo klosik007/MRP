@@ -1,54 +1,17 @@
-﻿@using MRP.Domain.DomainModels
-@model IEnumerable<Rooms>
+﻿
 @{
-    ViewBag.Title = "Rooms";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Admin Index";
+    Layout = null;
 }
 <html>
 <head>
-    <style>
-        table{
-            border-collapse: collapse;
-            table-layout: fixed;
-        }
-        tr, td {
-            padding: 2px;
-            
-        }
-    </style>
+  
 </head>
 <body>
-    <h2>Pokoje</h2>
-    <p>@Html.ActionLink("Utwórz nowy", "CreateRoom")</p>
-    <table>
-        <tr>
-            <th>@Html.DisplayNameFor(r => r.RoomNum)</th>
-            <th>@Html.DisplayNameFor(r => r.Floor)</th>
-                    <th>@Html.DisplayNameFor(r => r.RoomMaxCapacity)</th>
-                    <th>@Html.DisplayNameFor(r => r.Price)</th>
-                    <th>@Html.DisplayNameFor(r => r.IsFree)</th>
-                    <th></th>
-                </tr>
-
-                @foreach (var room in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(item => room.RoomNum)</td>
-                        <td>@Html.DisplayFor(item => room.Floor)</td>
-                        <td>@Html.DisplayFor(item => room.RoomMaxCapacity)</td>
-                        <td>@Html.DisplayFor(item => room.Price)</td>
-                        <td>@Html.DisplayFor(item => room.IsFree)</td>
-                        <td>@Html.ActionLink("Edytuj", "RoomEdit", new { room.RoomID })
-                            
-                            @using (Html.BeginForm("RoomDelete", "Admin"))
-                            {
-                                @Html.Hidden("RoomID", room.RoomID)
-                               <input type="submit" value="Usuń" />
-                            }
-                            
-                        </td>
-                    </tr>
-                }
-            </table>
+  <div>
+      <h2>Panel admina</h2><br />
+      @Html.ActionLink("Edytuj pokoje", "Rooms")<br />
+      @Html.ActionLink("Edytuj rezerwacje", "Reservations")
+    </div>
 </body>
 </html>

@@ -1,0 +1,64 @@
+﻿@using MRP.Domain.DomainModels
+@model IEnumerable<Reservations> 
+@{
+    Layout = null;
+    ViewBag.Title = "Edycja rezerwacji";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+        table {
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        tr, td {
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="rezerwacje">
+        <h2>Rezerwacje</h2>
+        <table>
+            <tr>
+                <th>@Html.DisplayNameFor(r => r.ReservationID)</th>
+                <th>@Html.DisplayNameFor(r => r.Name)</th>
+                <th>@Html.DisplayNameFor(r => r.RoomNum)</th>
+                <th>@Html.DisplayNameFor(r => r.Arrival)</th>
+                <th>@Html.DisplayNameFor(r => r.Departure)</th>
+                <th>@Html.DisplayNameFor(r => r.NumOfPeople)</th>
+                <th></th>
+            </tr>
+
+            @foreach (var reservation in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(item => reservation.ReservationID)</td>
+                    <td>@Html.DisplayFor(item => reservation.Name)</td>
+                    <td>@Html.DisplayFor(item => reservation.RoomNum)</td>
+                    <td>@Html.DisplayFor(item => reservation.Arrival)</td>
+                    <td>@Html.DisplayFor(item => reservation.Departure)</td>
+                    <td>@Html.DisplayFor(item => reservation.NumOfPeople)</td>
+                    
+
+                    <td>
+                        @Html.ActionLink("Edytuj", "ReservationEdit", new { reservation.ReservationID })
+
+                        @using (Html.BeginForm("ReservationDelete", "Admin"))
+                        {
+                            @Html.Hidden("ReservationID", reservation.ReservationID)
+                            <input type="submit" value="Usuń" />
+                        }
+
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
