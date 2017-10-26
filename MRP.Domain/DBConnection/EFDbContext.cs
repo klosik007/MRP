@@ -11,6 +11,6 @@ namespace MRP.Domain.DBConnection//klasa kontekstu
     public class EFDbContext : DbContext
     {
         public DbSet<Rooms> Rooms { get; set; }
-        //public DbSet<Reservations> Reservations {get; set;}
+        public DbSet<Reservations> Reservations { get; set; }
     }
 }

@@ -78,9 +78,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnection\EFDbContext.cs" />
+    <Compile Include="DBConnection\EFReservations.cs" />
     <Compile Include="DBConnection\EFRooms.cs" />
     <Compile Include="DomainModels\Reservations.cs" />
     <Compile Include="DomainModels\Rooms.cs" />
+    <Compile Include="Interfaces\IReservationsRepo.cs" />
     <Compile Include="Interfaces\IRoomsRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
