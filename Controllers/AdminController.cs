@@ -11,15 +11,26 @@ namespace MRP.Controllers
     public class AdminController : Controller
     {
         private IRoomsRepo repo;
-        public AdminController(IRoomsRepo Repo)
+        private IReservationsRepo repoRes;
+        public AdminController(IRoomsRepo Repo, IReservationsRepo RepoRes)
         {
             repo = Repo;
+            repoRes = RepoRes;
         }
-
         // /Admin/Index
         public ViewResult Index()
         {
+            return View();
+        }
+        // /Admin/Rooms
+        public ViewResult Rooms()
+        {
             return View(repo.Rooms);
+        }
+        // /Admin/ReservationsEdit
+        public ViewResult ReservationsEdit()
+        {
+            return View(repoRes.Reservations);
         }
         // /Admin/RoomEdit
         public ViewResult RoomEdit(int roomID)
@@ -61,5 +72,7 @@ namespace MRP.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        
     }
 }

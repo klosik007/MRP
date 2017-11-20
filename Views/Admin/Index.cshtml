@@ -1,17 +1,14 @@
 ﻿
 @{
     ViewBag.Title = "Admin Index";
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<html>
-<head>
-  
-</head>
-<body>
-  <div>
+
       <h2>Panel admina</h2><br />
-      @Html.ActionLink("Edytuj pokoje", "Rooms")<br />
-      @Html.ActionLink("Edytuj rezerwacje", "Reservations")
-    </div>
-</body>
-</html>
+      @Html.ActionLink("Edytuj pokoje", "Rooms", 
+                        new { }, new { @class = "btn btn-xs btn-primary" })<br /><br />
+      @Html.ActionLink("Edytuj rezerwacje", "ReservationsEdit", 
+                        new { }, new { @class = "btn btn-xs btn-primary" })<br /><br />
+      <p>Wyloguj</p>
+
+

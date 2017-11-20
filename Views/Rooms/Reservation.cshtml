@@ -2,8 +2,14 @@
 @model IEnumerable<Rooms>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml"; ;
     ViewBag.Title = "Rezerwacja pokoju";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "AR",
+        HttpMethod = "POST",
+        Url= Url.Action("ShowAvailableRooms", "Rooms")
+    };
 }
 
 <!DOCTYPE html>
@@ -20,7 +26,7 @@
             $("#arrival").datepicker({
                 changeMonth: true,
                 changeYear: true,
-                dateFormat: "dd.mm.yyyy",
+                dateFormat: "dd.mm.yy",
                 numberOfMonths: 1,
                 maxDate: 365,
                 minDate: -3650
@@ -29,7 +35,7 @@
             $("#departure").datepicker({
                 changeMonth: true,
                 changeYear: true,
-                dateFormat: "dd.mm.yyyy",
+                dateFormat: "dd.mm.yy",
                 numberOfMonths: 1,
                 maxDate: 365,
                 minDate: -3650
@@ -41,41 +47,37 @@
 </head>
 <body>
     
-        <fieldset>
-            <legend>Rezerwacja pokoju</legend>
-          @using (Ajax.BeginForm("ShowAvailableRooms", "Rooms", new AjaxOptions { UpdateTargetId = "AvailableRooms" }))
-          {
-                <ol>
-                    <!--<li>
-                    @Html.Label("Wybierz pokój:") 
-                    @Html.DropDownList("RoomList", ViewBag.roomlist as SelectList, "Wybierz pokój")
+    <fieldset>
+        <legend>Rezerwacja pokoju</legend>
+        @using (Ajax.BeginForm(ajaxOpts))
+        {
+            <ol>
+                <li>
+                    @Html.Label("Zameldowanie:")
+                    @Html.TextBox("arrival")
+                </li>
+                <li>
+                    @Html.Label("Wymeldowanie:")
+                    @Html.TextBox("departure")
+                </li>
+                <li>
+                    @Html.Label("Ilość osób dorosłych (18+)")
+                    @Html.TextBox("adults_num")
+                </li>
+                <li>
+                    @Html.Label("Ilość dzieci (0-17)")
+                    @Html.TextBox("kids_num")
+                </li>
+            </ol>
+            <button>Sprawdź dostępność i cenę</button>
 
-                </li>-->
-                   <li>
-                       @Html.Label("Zameldowanie:")
-                       @Html.TextBox("arrival")
-                   </li>
-                    <li>
-                        @Html.Label("Wymeldowanie:")
-                        @Html.TextBox("departure")
-                    </li>
-                    <li>
-                        @Html.Label("Ilość pokoi")
-                        @Html.TextBox("rooms_num")
-                    </li>
-                    <li>
-                        @Html.Label("Ilość osób dorosłych (18+)")
-                        @Html.TextBox("adults_num")
-                    </li>
-                    <li>
-                        @Html.Label("Ilość dzieci (0-17)")
-                        @Html.TextBox("kids_num")
-                    </li>              
-                </ol>
-                <button>Sprawdź dostępność i cenę</button>
+        }
+    </fieldset>
 
-                <div id="AvailableRooms"></div>
-          }
-        </fieldset>
+
+
+    <div id="AR">
+
+    </div>
 </body>
 </html>
