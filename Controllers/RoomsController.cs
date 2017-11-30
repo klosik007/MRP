@@ -16,10 +16,10 @@ namespace MRP.Controllers
         private IRoomsRepo repo;
         private IReservationsRepo repores;
 
-        public RoomsController(IRoomsRepo Repo, IReservationsRepo repoRes)
+        public RoomsController(IRoomsRepo Repo/*, IReservationsRepo repoRes*/)
         {
             repo = Repo;
-            repores = repoRes;
+           // repores = repoRes;
         }
 
         public ViewResult Rooms()
@@ -41,14 +41,16 @@ namespace MRP.Controllers
         {
            /* EFDbContext context = new EFDbContext();
             var getRoomList = context.Rooms.ToList();*/
-            IEnumerable<Rooms> data = repo.Rooms;
-
-            if (arrival != null && departure != null)
-            {
-                data = repo.Rooms.Where(x => x.RoomMaxCapacity >= adults_num + kids_num)
-                                  .Where(x => x.IsFree == true)
-                                  .OrderBy(x => x.RoomMaxCapacity);
-            }
+           IEnumerable<Rooms> data = repo.Rooms;
+           // IEnumerable<Reservations> data2 = repores.Reservations;
+            
+              data = repo.Rooms.Where(x => x.RoomMaxCapacity >= adults_num + kids_num)
+                               .Where(x => x.IsFree == true)
+                               .OrderBy(x => x.RoomMaxCapacity);
+           // data2 = repores.Reservations.Where(x => x.Departure <= arrival)
+             //                           .Where(x => x.Room.RoomMaxCapacity >= adults_num + kids_num)
+               //                         ;
+            
             
             /*DateTime arr = Convert.ToDateTime(Request["arrival"].ToString());
             DateTime dep = Convert.ToDateTime(Request["departure"].ToString());
@@ -60,12 +62,11 @@ namespace MRP.Controllers
                 .Where(x => x.RoomMaxCapacity >= adults_num + kids_num)
                 .Where(x => x.IsFree == true)
                 .OrderBy(x => x.RoomMaxCapacity)
-                ;*/
-
-                
-            
+                ;*/  
             return PartialView(data);
         }
+
+
     }
 }
 
