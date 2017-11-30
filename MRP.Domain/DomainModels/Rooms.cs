@@ -19,16 +19,19 @@ namespace MRP.Domain.DomainModels
         [Display(Name ="Numer pokoju")]
         public string RoomNum { get; set; }
 
-        [Display(Name = "Max. osób w pokoju")]
+        [Display(Name = "Maksymalna ilość osób w pokoju")]
         public int RoomMaxCapacity { get; set; }
 
         [Display(Name = "Wolny?")]
         public bool IsFree { get; set; }
 
         [Display(Name = "Cena")]
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         [Display(Name = "Piętro")]
         public int Floor { get; set; }
+
+       
+       //public virtual Reservations Reservations { get; set; }
     }
 }
